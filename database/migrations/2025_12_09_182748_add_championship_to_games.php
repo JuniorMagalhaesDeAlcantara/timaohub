@@ -9,17 +9,20 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-   public function up()
-{
-    Schema::table('games', function (Blueprint $table) {
-        $table->string('championship')->nullable()->after('opponent');
-    });
-}
+    public function up(): void
+    {
+        Schema::table('games', function (Blueprint $table) {
+            //
+        });
+    }
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('games');
+        Schema::table('games', function (Blueprint $table) {
+            //
+        });
     }
 };
