@@ -56,15 +56,19 @@ Os dados são obtidos da **[API-Football](https://www.api-football.com/)**, gara
       npm install
       npm run dev
     ```
+
 4. **Configure o arquivo .env com suas credenciais do banco de dados, chave da API-Football e outras variáveis de ambiente.**
+
 5. **Rode as migrations:**
     ```bash
     php artisan migrate
     ```
+
 6.**Inicie o servidor:**
     ```bash
     php artisan serve
     ```
+
 7. **Acesse a aplicação no navegador:**
    http://localhost:8000
 
@@ -96,9 +100,15 @@ git push origin feature/nome-da-feature
 
 API-Football
 
+https://api-sports.io/documentation/widgets/v3#section/Introduction
+
 **Documentação Laravel**
 
-TailwindCSS
+https://laravel.com/docs/12.x/installation
+
+**TailwindCSS**
+
+https://tailwindcss.com/
 
 **📄 Licença**
 
