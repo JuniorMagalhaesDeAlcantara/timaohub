@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TimãoHub - {{ $title ?? 'Dashboard Corinthians' }}</title>
+    <title>Central do Timão - {{ $title ?? 'Dashboard Corinthians' }}</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -40,8 +40,8 @@
                             class="h-12 w-12 object-contain">
                     </div>
                     <div>
-                        <h1 class="text-3xl font-black text-white tracking-wider">TIMÃOHUB</h1>
-                        <p class="text-gray-300 text-sm font-bold tracking-wide">VAI CORINTHIANS!</p>
+                        <h1 class="text-3xl font-black text-white tracking-wider">CENTRAL DO TIMÃO</h1>
+                        <p class="text-gray-300 text-sm font-bold tracking-wide">VAI CORINTHIANS</p>
                     </div>
                 </a>
 
@@ -105,7 +105,7 @@
                             class="h-12 w-12">
                     </div>
                     <div>
-                        <p class="font-black text-xl text-white">TIMÃOHUB</p>
+                        <p class="font-black text-xl text-white">CENTRAL DO TIMÃO</p>
                         <p class="text-gray-400 text-sm">O site da Fiel</p>
                     </div>
                 </div>
@@ -113,7 +113,7 @@
                 <!-- Copyright -->
                 <div class="text-center md:text-right">
                     <p class="text-white font-bold">
-                        © {{ date('Y') }} TimãoHub
+                        © {{ date('Y') }} Central do Timão
                     </p>
                     <p class="text-gray-400 text-sm mt-1">
                         Dados fornecidos por API-Sports
