@@ -64,7 +64,7 @@ Os dados são obtidos da **[API-Football](https://www.api-football.com/)**, gara
     php artisan migrate
     ```
 
-6.**Inicie o servidor:**
+6. **Inicie o servidor:**
     ```bash
     php artisan serve
     ```
