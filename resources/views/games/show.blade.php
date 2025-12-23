@@ -5,39 +5,39 @@
     <div class="max-w-7xl mx-auto px-4 py-8">
 
         @php
-            $corinthiansId = 131;
-            $homeTeam = $fixture['teams']['home'];
-            $awayTeam = $fixture['teams']['away'];
-            $homeGoals = $fixture['goals']['home'] ?? 0;
-            $awayGoals = $fixture['goals']['away'] ?? 0;
-            
-            $isCorinthiansHome = $homeTeam['id'] == $corinthiansId;
-            $isCorinthiansAway = $awayTeam['id'] == $corinthiansId;
-            $corinthiansWon = false;
-            
-            if ($isCorinthiansHome && $homeGoals > $awayGoals) {
-                $corinthiansWon = true;
-            } elseif ($isCorinthiansAway && $awayGoals > $homeGoals) {
-                $corinthiansWon = true;
-            }
+        $corinthiansId = 131;
+        $homeTeam = $fixture['teams']['home'];
+        $awayTeam = $fixture['teams']['away'];
+        $homeGoals = $fixture['goals']['home'] ?? 0;
+        $awayGoals = $fixture['goals']['away'] ?? 0;
 
-            $statusMap = [
-                'Match Finished' => 'Partida Encerrada',
-                'First Half' => 'Primeiro Tempo',
-                'Second Half' => 'Segundo Tempo',
-                'Halftime' => 'Intervalo',
-                'Not Started' => 'Não Iniciado',
-                'Time to be defined' => 'Horário a Definir',
-                'Match Postponed' => 'Partida Adiada',
-                'Match Cancelled' => 'Partida Cancelada',
-                'Match Suspended' => 'Partida Suspensa',
-            ];
-            
-            $statusPt = $statusMap[$fixture['fixture']['status']['long']] ?? $fixture['fixture']['status']['long'];
-            
-            // Traduzir round
-            $round = $fixture['league']['round'];
-            $round = str_replace('Regular Season - ', 'Rodada ', $round);
+        $isCorinthiansHome = $homeTeam['id'] == $corinthiansId;
+        $isCorinthiansAway = $awayTeam['id'] == $corinthiansId;
+        $corinthiansWon = false;
+
+        if ($isCorinthiansHome && $homeGoals > $awayGoals) {
+        $corinthiansWon = true;
+        } elseif ($isCorinthiansAway && $awayGoals > $homeGoals) {
+        $corinthiansWon = true;
+        }
+
+        $statusMap = [
+        'Match Finished' => 'Partida Encerrada',
+        'First Half' => 'Primeiro Tempo',
+        'Second Half' => 'Segundo Tempo',
+        'Halftime' => 'Intervalo',
+        'Not Started' => 'Não Iniciado',
+        'Time to be defined' => 'Horário a Definir',
+        'Match Postponed' => 'Partida Adiada',
+        'Match Cancelled' => 'Partida Cancelada',
+        'Match Suspended' => 'Partida Suspensa',
+        ];
+
+        $statusPt = $statusMap[$fixture['fixture']['status']['long']] ?? $fixture['fixture']['status']['long'];
+
+        // Traduzir round
+        $round = $fixture['league']['round'];
+        $round = str_replace('Regular Season - ', 'Rodada ', $round);
         @endphp
 
         {{-- CABEÇALHO COM RESULTADO - Com destaque preto e dourado se Corinthians ganhou --}}
@@ -189,7 +189,8 @@
                             <div class="relative bg-gradient-to-b from-green-500 to-green-600 rounded-2xl p-4 mb-6 shadow-inner" style="height: 480px;">
                                 {{-- Linhas do campo --}}
                                 <div class="absolute inset-0 opacity-20 pointer-events-none">
-                                    <div class="absolute top-0 left-1/2 w-px h-full bg-white"></div>
+                                    <div class="absolute top-1/2 left-0 w-full h-px bg-white"></div>
+
                                     <div class="absolute top-1/2 left-1/2 w-20 h-20 border-2 border-white rounded-full -ml-10 -mt-10"></div>
                                     <div class="absolute top-1/2 left-1/2 w-2 h-2 bg-white rounded-full -ml-1 -mt-1"></div>
 
