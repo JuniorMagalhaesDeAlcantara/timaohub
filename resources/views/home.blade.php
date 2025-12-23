@@ -7,15 +7,15 @@
         
         {{-- HERO CARD COM ESCUDO E NOME --}}
         <div class="relative overflow-hidden bg-gradient-to-br from-gray-900 via-black to-gray-900 rounded-3xl shadow-2xl border-4 border-black mb-10">
-            <!-- Escudo marca d'água -->
             <div class="absolute inset-0 opacity-10">
-                <div class="absolute inset-0" style="background-image: url('https://media.api-sports.io/football/teams/131.png'); background-size: 500px; background-repeat: no-repeat; background-position: right -100px center;"></div>
+                <div class="absolute inset-0" style="background-image: url('https://media.api-sports.io/football/teams/{{ $team['id'] ?? 131 }}.png'); background-size: 500px; background-repeat: no-repeat; background-position: right -100px center;"></div>
             </div>
             
             <div class="relative z-10 p-10">
                 <div class="flex flex-col md:flex-row items-center gap-8">
-                    <img src="https://media.api-sports.io/football/teams/131.png"
-                         class="w-36 h-36 drop-shadow-2xl">
+                    <img src="https://media.api-sports.io/football/teams/{{ $team['id'] ?? 131 }}.png"
+                         class="w-36 h-36 drop-shadow-2xl"
+                         alt="{{ $team['name'] ?? 'CORINTHIANS' }}">
                     
                     <div>
                         <h1 class="text-6xl md:text-7xl font-black text-white tracking-tight uppercase">
@@ -23,23 +23,52 @@
                         </h1>
                         <p class="text-gray-300 text-2xl mt-3 flex items-center gap-3 font-bold">
                             <span class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></span>
-                            Temporada {{ $stats['league']['season'] ?? '2023' }} • {{ $stats['league']['name'] ?? 'Brasileirão' }}
+                            Temporada {{ $stats['league']['season'] ?? '2024' }} • {{ $stats['league']['name'] ?? 'Brasileirão' }}
                         </p>
                         
                         @if($venue)
                         <p class="text-gray-400 text-base mt-3 font-medium">
                             🏟️ {{ $venue['name'] ?? '' }} • {{ $venue['city'] ?? '' }}
+                            @if(isset($venue['capacity']))
+                                • Capacidade: {{ number_format($venue['capacity']) }}
+                            @endif
                         </p>
                         @endif
                     </div>
                 </div>
             </div>
 
-            <!-- Borda inferior decorativa -->
             <div class="h-2 bg-gradient-to-r from-white via-gray-300 to-white"></div>
         </div>
 
         <div class="space-y-10">
+
+        {{-- CLASSIFICAÇÃO --}}
+        @if(isset($standing))
+        <div class="bg-gradient-to-br from-blue-600 to-blue-700 rounded-3xl shadow-xl p-8 border-2 border-blue-800">
+            <h2 class="text-white text-2xl font-black mb-6 flex items-center gap-3 uppercase tracking-wide">
+                🏆 POSIÇÃO NA TABELA
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-white/20 backdrop-blur rounded-2xl p-5">
+                    <p class="text-blue-100 text-xs font-bold uppercase">Posição</p>
+                    <p class="text-5xl font-black text-white mt-2">{{ $standing['rank'] }}º</p>
+                </div>
+                <div class="bg-white/20 backdrop-blur rounded-2xl p-5">
+                    <p class="text-blue-100 text-xs font-bold uppercase">Pontos</p>
+                    <p class="text-5xl font-black text-white mt-2">{{ $standing['points'] }}</p>
+                </div>
+                <div class="bg-white/20 backdrop-blur rounded-2xl p-5">
+                    <p class="text-blue-100 text-xs font-bold uppercase">Saldo</p>
+                    <p class="text-5xl font-black text-white mt-2">{{ $standing['goalsDiff'] > 0 ? '+' : '' }}{{ $standing['goalsDiff'] }}</p>
+                </div>
+                <div class="bg-white/20 backdrop-blur rounded-2xl p-5">
+                    <p class="text-blue-100 text-xs font-bold uppercase">Aproveitamento</p>
+                    <p class="text-5xl font-black text-white mt-2">{{ round(($standing['points'] / ($standing['all']['played'] * 3)) * 100) }}%</p>
+                </div>
+            </div>
+        </div>
+        @endif
 
         {{-- SEQUÊNCIA DE RESULTADOS --}}
         @if(!empty($formArray))
@@ -81,7 +110,6 @@
         {{-- CARDS DE ESTATÍSTICAS PRINCIPAIS --}}
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             
-            {{-- Jogos --}}
             <div class="bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl shadow-xl p-6 transform hover:scale-105 transition">
                 <p class="text-blue-100 text-sm font-medium">JOGOS</p>
                 <p class="text-5xl font-black text-white mt-2">
@@ -89,7 +117,6 @@
                 </p>
             </div>
 
-            {{-- Vitórias --}}
             <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-2xl shadow-xl p-6 transform hover:scale-105 transition">
                 <p class="text-green-100 text-sm font-medium">VITÓRIAS</p>
                 <p class="text-5xl font-black text-white mt-2">
@@ -97,7 +124,6 @@
                 </p>
             </div>
 
-            {{-- Empates --}}
             <div class="bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-2xl shadow-xl p-6 transform hover:scale-105 transition">
                 <p class="text-yellow-100 text-sm font-medium">EMPATES</p>
                 <p class="text-5xl font-black text-white mt-2">
@@ -105,7 +131,6 @@
                 </p>
             </div>
 
-            {{-- Derrotas --}}
             <div class="bg-gradient-to-br from-red-500 to-red-600 rounded-2xl shadow-xl p-6 transform hover:scale-105 transition">
                 <p class="text-red-100 text-sm font-medium">DERROTAS</p>
                 <p class="text-5xl font-black text-white mt-2">
@@ -118,7 +143,6 @@
         {{-- ESTATÍSTICAS DE GOLS --}}
         <div class="grid md:grid-cols-2 gap-6">
             
-            {{-- Gols Marcados --}}
             <div class="bg-white rounded-3xl shadow-xl p-8 border-2 border-gray-200">
                 <h3 class="text-green-600 text-xl font-black mb-6 uppercase tracking-wide">⚽ GOLS MARCADOS</h3>
                 
@@ -142,7 +166,6 @@
                 </div>
             </div>
 
-            {{-- Gols Sofridos --}}
             <div class="bg-white rounded-3xl shadow-xl p-8 border-2 border-gray-200">
                 <h3 class="text-red-600 text-xl font-black mb-6 uppercase tracking-wide">🛡️ GOLS SOFRIDOS</h3>
                 
@@ -175,16 +198,16 @@
 
         </div>
 
-        {{-- ARTILHEIROS --}}
+        {{-- ARTILHEIROS - CORRIGIDO --}}
         <div class="bg-white rounded-3xl shadow-xl p-8 border-2 border-gray-200">
             <h2 class="text-black text-3xl font-black mb-8 flex items-center gap-3 uppercase tracking-wide">
                 <span class="text-4xl">🔥</span>
                 ARTILHEIROS DA TEMPORADA
             </h2>
 
-            @if(count($scorers) > 0)
+            @if(count($processedScorers) > 0)
             <div class="space-y-4">
-                @foreach($scorers as $index => $item)
+                @foreach($processedScorers as $index => $scorer)
                 <div class="bg-gray-50 rounded-2xl p-6 flex items-center gap-6 hover:bg-gray-100 transition transform hover:scale-[1.02] border border-gray-200">
                     
                     {{-- Ranking --}}
@@ -210,29 +233,32 @@
 
                     {{-- Foto --}}
                     @php
-                        $playerName = str_replace(' ', '+', $item['player']['name']);
+                        $playerName = str_replace(' ', '+', $scorer['player']['name']);
                         $fallbackUrl = "https://ui-avatars.com/api/?name={$playerName}&background=random";
                     @endphp
-                    <img src="{{ $item['player']['photo'] ?? $fallbackUrl }}"
+                    <img src="{{ $scorer['player']['photo'] ?? $fallbackUrl }}"
                          class="w-20 h-20 rounded-full border-4 border-gray-300 shadow-lg object-cover"
                          onerror="this.src='{{ $fallbackUrl }}'">
 
                     {{-- Info --}}
                     <div class="flex-1">
-                        <p class="font-black text-black text-xl">{{ $item['player']['name'] }}</p>
-                        <p class="text-gray-600 text-sm font-bold mt-1">{{ $item['games'] }} jogos disputados</p>
+                        <p class="font-black text-black text-xl">{{ $scorer['player']['name'] }}</p>
+                        <p class="text-gray-600 text-sm font-bold mt-1">{{ $scorer['games'] }} jogos disputados</p>
+                        @if($scorer['rating'])
+                        <p class="text-gray-500 text-xs mt-1">Nota média: {{ number_format($scorer['rating'], 1) }}</p>
+                        @endif
                     </div>
 
                     {{-- Stats --}}
                     <div class="text-right space-y-2">
                         <div class="flex items-center gap-3 justify-end">
                             <span class="text-3xl">⚽</span>
-                            <span class="text-4xl font-black text-black">{{ $item['goals'] }}</span>
+                            <span class="text-4xl font-black text-black">{{ $scorer['goals'] }}</span>
                         </div>
-                        @if($item['assists'] > 0)
+                        @if($scorer['assists'] > 0)
                         <div class="flex items-center gap-2 justify-end">
                             <span class="text-sm text-gray-600 font-bold">Assistências:</span>
-                            <span class="text-sm font-black text-green-600">{{ $item['assists'] }}</span>
+                            <span class="text-sm font-black text-green-600">{{ $scorer['assists'] }}</span>
                         </div>
                         @endif
                     </div>
@@ -248,10 +274,40 @@
             @endif
         </div>
 
+        {{-- ÚLTIMOS JOGOS --}}
+        @if(isset($lastGames) && count($lastGames) > 0)
+        <div class="bg-white rounded-3xl shadow-xl p-8 border-2 border-gray-200">
+            <h2 class="text-black text-2xl font-black mb-6 uppercase tracking-wide">
+                📋 ÚLTIMOS JOGOS
+            </h2>
+            <div class="space-y-3">
+                @foreach($lastGames as $game)
+                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition">
+                    <div class="flex items-center gap-4 flex-1">
+                        <img src="{{ $game['teams']['home']['logo'] }}" class="w-8 h-8" alt="">
+                        <span class="font-bold text-sm">{{ $game['teams']['home']['name'] }}</span>
+                    </div>
+                    <div class="text-center px-4">
+                        <div class="font-black text-2xl">
+                            {{ $game['goals']['home'] ?? '-' }} x {{ $game['goals']['away'] ?? '-' }}
+                        </div>
+                        <div class="text-xs text-gray-500">
+                            {{ \Carbon\Carbon::parse($game['fixture']['date'])->format('d/m/Y') }}
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4 flex-1 justify-end">
+                        <span class="font-bold text-sm">{{ $game['teams']['away']['name'] }}</span>
+                        <img src="{{ $game['teams']['away']['logo'] }}" class="w-8 h-8" alt="">
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+        @endif
+
         {{-- PRÓXIMO JOGO --}}
         @if($nextGame)
         <div class="bg-gradient-to-br from-black to-gray-900 rounded-3xl shadow-2xl p-8 border-4 border-white relative overflow-hidden">
-            <!-- Listras sutis -->
             <div class="absolute inset-0 flex opacity-5">
                 <div class="flex-1 bg-black"></div>
                 <div class="w-3 bg-white"></div>
@@ -269,14 +325,12 @@
 
                 <div class="flex flex-col md:flex-row items-center justify-between gap-8">
                     
-                    {{-- Time Casa --}}
                     <div class="flex flex-col items-center text-center flex-1">
                         <img src="{{ $nextGame['teams']['home']['logo'] }}"
                              class="w-28 h-28 mb-4 drop-shadow-2xl">
                         <p class="text-white font-black text-2xl">{{ $nextGame['teams']['home']['name'] }}</p>
                     </div>
 
-                    {{-- VS e Data --}}
                     <div class="text-center bg-white rounded-2xl p-6 shadow-xl">
                         <div class="text-black text-5xl font-black mb-3">VS</div>
                         <p class="text-gray-700 font-bold">
@@ -287,7 +341,6 @@
                         </p>
                     </div>
 
-                    {{-- Time Visitante --}}
                     <div class="flex flex-col items-center text-center flex-1">
                         <img src="{{ $nextGame['teams']['away']['logo'] }}"
                              class="w-28 h-28 mb-4 drop-shadow-2xl">

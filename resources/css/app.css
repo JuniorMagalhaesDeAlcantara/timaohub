@@ -6,6 +6,44 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+/* ===============================
+   API-Football – Corinthians Only
+   =============================== */
+
+/* Esconde partidas que não envolvem o Corinthians */
+api-sports-widget [data-team-id]:not([data-team-id="131"]) {
+    display: none !important;
+}
+
+/* Ajustes visuais */
+api-sports-widget {
+    font-family: var(--font-sans);
+}
+
+/* Destaque jogo ao vivo */
+api-sports-widget .live {
+    border-left: 4px solid #000;
+    padding-left: 8px;
+}
+
+api-sports-widget {
+    --primary-color: #000;
+    --secondary-color: #fff;
+    background: #fff;
+    border-radius: 12px;
+}
+
+api-sports-widget .fixture {
+    transition: background 0.2s ease;
+}
+
+api-sports-widget .fixture:hover {
+    background: #f4f4f5;
+}
+
+

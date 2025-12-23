@@ -43,3 +43,7 @@ Route::get('/', [HomeController::class, 'index']);
 
 // Jogos do Corinthians
 Route::get('/jogos', [GameController::class, 'index'])->name('games.index');
+
+Route::get('/jogos/{fixtureId}', [GameController::class, 'show'])
+    ->name('games.show');
+
