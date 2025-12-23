@@ -1,59 +1,105 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🖤 TimãoHub
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![Laravel](https://img.shields.io/badge/Laravel-11-red?style=flat-square) ![PHP](https://img.shields.io/badge/PHP-8.2-blue?style=flat-square) ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.3-teal?style=flat-square) ![Build](https://img.shields.io/badge/build-passing-brightgreen?style=flat-square) ![License](https://img.shields.io/badge/License-MIT-lightgrey?style=flat-square)
 
-## About Laravel
+TimãoHub é uma aplicação web desenvolvida em **Laravel 11** que oferece um **dashboard completo do Corinthians**, com estatísticas de jogos, artilheiros e informações essenciais do time. ⚽🖤  
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Os dados são obtidos da **[API-Football](https://www.api-football.com/)**, garantindo informações atualizadas sobre partidas, times e jogadores.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🏆 Funcionalidades
 
-## Learning Laravel
+- Dashboard exclusivo com dados do Corinthians  
+- Estatísticas de partidas (home e away)  
+- Artilheiro do time destacado  
+- Placar de jogos recentes  
+- Layout responsivo usando **TailwindCSS**  
+- Dados atualizados via **API-Football**  
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🚀 Tecnologias
 
-## Laravel Sponsors
+- **Backend:** Laravel 11 (PHP 8.2)  
+- **Frontend:** Blade Templates, TailwindCSS, JavaScript  
+- **Banco de Dados:** MySQL / PostgreSQL  
+- **Integração:** API-Football  
+- **Ferramentas:** Vite, Composer, NPM  
+- **Controle de versão:** Git / GitHub  
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+## ⚙️ Pré-requisitos
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+- PHP >= 8.2  
+- Composer  
+- Node.js + NPM  
+- Banco de dados MySQL ou PostgreSQL  
+- Laravel 11  
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 🛠️ Instalação
 
-## Code of Conduct
+1. **Clone o repositório:**
+   ```bash
+   git clone <seu-repositorio>
+   cd timãohub
+   ```
+2. **Instale as dependências do Laravel:**  
+    ```bash
+    composer install
+    ```
+3. **Instale as dependências do frontend:**
+    ```bash
+      npm install
+      npm run dev
+    ```
+4. **Configure o arquivo .env com suas credenciais do banco de dados, chave da API-Football e outras variáveis de ambiente.**
+5. **Rode as migrations:**
+    ```bash
+    php artisan migrate
+    ```
+6.**Inicie o servidor:**
+    ```bash
+    php artisan serve
+    ```
+7. **Acesse a aplicação no navegador:**
+   http://localhost:8000
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+**Contribuição**
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Contribuições são bem-vindas! Para contribuir:
 
-## License
+Fork o projeto
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**Crie uma branch:**
+```bash
+git checkout -b feature/nome-da-feature
+```
+
+**Faça commit das alterações:**
+```bash
+git commit -m "Adicionei nova feature"
+```
+
+**Push para a branch:**
+```bash
+git push origin feature/nome-da-feature
+```
+
+**Abra um Pull Request**
+
+🌐 Links Úteis
+
+API-Football
+
+**Documentação Laravel**
+
+TailwindCSS
+
+**📄 Licença**
+
+Este projeto é licenciado sob a MIT License
