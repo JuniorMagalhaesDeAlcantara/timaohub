@@ -4,6 +4,11 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\NoticiasController;
+
+// Home agora vem da GNews
+Route::get('/', [NoticiasController::class, 'index']);
+
 
 /*
 |--------------------------------------------------------------------------
@@ -51,11 +56,8 @@ Route::get('/corinthians', function () {
 |--------------------------------------------------------------------------
 */
 
-Route::get('/', function () {
-    return view('noticias.index', [
-        'title' => 'Notícias do Corinthians'
-    ]);
-});
+// Home agora vem da GNews
+Route::get('/', [NoticiasController::class, 'index']);
 
 
 /*

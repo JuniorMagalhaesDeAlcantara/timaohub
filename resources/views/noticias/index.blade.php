@@ -3,47 +3,50 @@
 @section('content')
 <div class="max-w-7xl mx-auto px-6 py-10">
 
-    <!-- Título da Página -->
+    <!-- Título -->
     <div class="mb-10 text-center">
-        <h2 class="text-4xl font-black text-gray-900">
+        <h2 class="text-4xl font-black">
             📰 Notícias do Corinthians
         </h2>
-        <p class="text-gray-600 mt-2 font-semibold">
-            Tudo o que acontece no Timão, em um só lugar
+        <p class="text-gray-600 font-semibold mt-2">
+            As últimas notícias do Timão
         </p>
     </div>
 
-    <!-- Grid de Notícias (mock por enquanto) -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    @if (empty($noticias))
+        <p class="text-center text-gray-500">
+            Nenhuma notícia encontrada no momento.
+        </p>
+    @else
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            @foreach ($noticias as $noticia)
+                <article class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition">
 
-        @for ($i = 0; $i < 6; $i++)
-            <article class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition">
+                    @if($noticia['image'])
+                        <img src="{{ $noticia['image'] }}"
+                             class="w-full h-48 object-cover">
+                    @endif
 
-                <!-- Imagem -->
-                <div class="h-48 bg-gray-200 flex items-center justify-center">
-                    <span class="text-gray-400 font-bold">
-                        IMAGEM DA NOTÍCIA
-                    </span>
-                </div>
+                    <div class="p-6">
+                        <h3 class="font-black text-lg mb-3">
+                            {{ $noticia['title'] }}
+                        </h3>
 
-                <!-- Conteúdo -->
-                <div class="p-6">
-                    <h3 class="font-black text-lg text-gray-900 mb-3">
-                        Corinthians se prepara para o próximo desafio
-                    </h3>
+                        <p class="text-gray-600 text-sm mb-4">
+                            {{ $noticia['description'] }}
+                        </p>
 
-                    <p class="text-gray-600 text-sm mb-4">
-                        Elenco treinou forte no CT Joaquim Grava visando o próximo confronto...
-                    </p>
-
-                    <div class="flex justify-between items-center text-xs text-gray-500 font-semibold">
-                        <span>Fonte: GNews</span>
-                        <span>{{ date('d/m/Y') }}</span>
+                        <div class="flex justify-between items-center text-xs text-gray-500 font-semibold">
+                            <span>{{ $noticia['source']['name'] }}</span>
+                            <span>
+                                {{ \Carbon\Carbon::parse($noticia['publishedAt'])->format('d/m/Y H:i') }}
+                            </span>
+                        </div>
                     </div>
-                </div>
-            </article>
-        @endfor
+                </article>
+            @endforeach
+        </div>
+    @endif
 
-    </div>
 </div>
 @endsection
