@@ -58,7 +58,10 @@ Route::get('/corinthians', function () {
 
 // Home agora vem da GNews
 
-Route::get('/noticia/{hash}', [NoticiasController::class, 'show'])
+Route::get('/noticias', [NoticiasController::class, 'index'])
+    ->name('noticias.index');
+
+Route::get('/noticias/{slug}', [NoticiasController::class, 'show'])
     ->name('noticias.show');
 
 

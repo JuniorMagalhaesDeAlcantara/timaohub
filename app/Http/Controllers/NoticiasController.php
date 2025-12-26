@@ -2,56 +2,44 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Http;
+use App\Services\NoticiasService;
+use Illuminate\Http\Request;
 
 class NoticiasController extends Controller
 {
+    private NoticiasService $service;
+
+    public function __construct(NoticiasService $service)
+    {
+        $this->service = $service;
+    }
+
+    /**
+     * Lista de notícias
+     */
     public function index()
     {
-        $response = Http::get('https://gnews.io/api/v4/search', [
-            'q'       => 'Corinthians',
-            'lang'    => 'pt',
-            'country' => 'br',
-            'max'     => 10,
-            'apikey'  => env('GNEWS_API_KEY'),
-        ]);
-
-        $articles = $response->json()['articles'] ?? [];
-
-        $destaque = $articles[0] ?? null;
-        $noticias = array_slice($articles, 1);
+        $noticias = $this->service->getNoticiasCorinthians(7);
 
         return view('noticias.index', [
-            'title'    => 'Notícias do Corinthians',
-            'destaque' => $destaque,
-            'noticias' => $noticias,
+            'destaque' => $noticias->first(),
+            'noticias' => $noticias->skip(1),
         ]);
     }
 
-    // Página interna da notícia
-    public function show($hash)
+    /**
+     * Página de leitura da notícia
+     */
+    public function show(string $slug)
     {
-        $response = Http::get('https://gnews.io/api/v4/search', [
-            'q'       => 'Corinthians',
-            'lang'    => 'pt',
-            'country' => 'br',
-            'max'     => 10,
-            'apikey'  => env('GNEWS_API_KEY'),
-        ]);
-
-        $articles = $response->json()['articles'] ?? [];
-
-        $noticia = collect($articles)->first(function ($item) use ($hash) {
-            return md5($item['url']) === $hash;
-        });
+        $noticia = $this->service->findBySlug($slug);
 
         if (!$noticia) {
-            abort(404);
+            abort(404, 'Notícia não encontrada');
         }
 
         return view('noticias.show', [
-            'title'   => $noticia['title'],
-            'noticia' => $noticia,
+            'noticia' => $noticia
         ]);
     }
 }

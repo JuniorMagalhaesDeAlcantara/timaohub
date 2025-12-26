@@ -39,4 +39,8 @@ return [
         'key' => env('API_FOOTBALL_KEY'),
     ],
 
+    'gnews' => [
+        'key' => env('GNEWS_API_KEY'),
+    ],
+
 ];
