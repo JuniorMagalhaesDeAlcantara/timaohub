@@ -47,27 +47,51 @@
 
                 <!-- Navegação -->
                 <nav class="flex gap-3 z-10">
+
+                    <!-- Notícias (HOME) -->
                     <a href="/"
                         class="flex items-center gap-2 px-8 py-4 rounded-xl font-black text-sm transition-all duration-300 uppercase tracking-wide
-                              {{ request()->is('/') 
-                                  ? 'bg-white text-black shadow-2xl transform scale-105' 
-                                  : 'bg-white/10 text-white hover:bg-white/20 backdrop-blur-sm border border-white/30' }}">
+              {{ request()->is('/') 
+                  ? 'bg-white text-black shadow-2xl transform scale-105' 
+                  : 'bg-white/10 text-white hover:bg-white/20 backdrop-blur-sm border border-white/30' }}">
+
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                d="M19 20H5a2 2 0 01-2-2V8a2 2 0 012-2h3l2-2h4l2 2h3a2 2 0 012 2v10a2 2 0 01-2 2z" />
                         </svg>
-                        Home
+                        Notícias
                     </a>
+
+                    <!-- Estatísticas -->
+                    <a href="/estatisticas"
+                        class="flex items-center gap-2 px-8 py-4 rounded-xl font-black text-sm transition-all duration-300 uppercase tracking-wide
+              {{ request()->is('estatisticas') 
+                  ? 'bg-white text-black shadow-2xl transform scale-105' 
+                  : 'bg-white/10 text-white hover:bg-white/20 backdrop-blur-sm border border-white/30' }}">
+
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                d="M11 3v18m4-14v14m4-10v10M7 13v8M3 17v4" />
+                        </svg>
+                        Estatísticas
+                    </a>
+
+                    <!-- Jogos -->
                     <a href="/jogos"
                         class="flex items-center gap-2 px-8 py-4 rounded-xl font-black text-sm transition-all duration-300 uppercase tracking-wide
-                              {{ request()->is('jogos') 
-                                  ? 'bg-white text-black shadow-2xl transform scale-105' 
-                                  : 'bg-white/10 text-white hover:bg-white/20 backdrop-blur-sm border border-white/30' }}">
+              {{ request()->is('jogos') 
+                  ? 'bg-white text-black shadow-2xl transform scale-105' 
+                  : 'bg-white/10 text-white hover:bg-white/20 backdrop-blur-sm border border-white/30' }}">
+
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2" />
                         </svg>
                         Jogos
                     </a>
+
                 </nav>
+
 
             </div>
         </div>
