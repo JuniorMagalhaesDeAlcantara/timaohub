@@ -12,7 +12,7 @@
 
                 @if(!empty($destaque['image']))
                     <img src="{{ $destaque['image'] }}"
-                         alt="{{ $destaque['title'] }}"
+                         alt="{{ $destaque['title'] ?? 'Notícia em destaque' }}"
                          class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out">
                 @else
                     <div class="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-700 flex items-center justify-center">
@@ -31,11 +31,11 @@
                     </span>
 
                     <h2 class="text-2xl sm:text-3xl lg:text-5xl font-extrabold text-white mb-3 leading-tight drop-shadow-2xl">
-                        {{ $destaque['title'] }}
+                        {{ $destaque['title'] ?? '' }}
                     </h2>
 
                     <p class="text-gray-100 text-sm sm:text-base max-w-3xl leading-relaxed line-clamp-2 drop-shadow-lg">
-                        {{ $destaque['excerpt'] }}
+                        {{ $destaque['excerpt'] ?? '' }}
                     </p>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                 <div class="relative overflow-hidden">
                     @if(!empty($noticia['image']))
                         <img src="{{ $noticia['image'] }}"
-                             alt="{{ $noticia['title'] }}"
+                             alt="{{ $noticia['title'] ?? 'Notícia' }}"
                              class="w-full h-48 sm:h-56 object-cover transform group-hover:scale-105 transition-transform duration-500">
                     @else
                         <div class="w-full h-48 sm:h-56 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
@@ -65,16 +65,16 @@
 
                 <div class="p-5 sm:p-6">
                     <h3 class="font-bold text-gray-900 text-base sm:text-lg mb-2 sm:mb-3 leading-snug line-clamp-2 group-hover:text-blue-600 transition-colors">
-                        {{ $noticia['title'] }}
+                        {{ $noticia['title'] ?? '' }}
                     </h3>
 
                     <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-3">
-                        {{ $noticia['excerpt'] }}
+                        {{ $noticia['excerpt'] ?? '' }}
                     </p>
 
                     <div class="flex items-center justify-between pt-3 border-t border-gray-100">
                         <span class="text-xs font-medium text-gray-500">
-                            {{ $noticia['source'] }}
+                            {{ $noticia['source']['name'] ?? 'Fonte desconhecida' }}
                         </span>
                         
                         <svg class="w-5 h-5 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -87,7 +87,7 @@
 
     </div>
 
-    <!-- PAGINAÇÃO (se houver) -->
+    <!-- PAGINAÇÃO -->
     @if(isset($noticias) && method_exists($noticias, 'links'))
         <div class="mt-12">
             {{ $noticias->links() }}
