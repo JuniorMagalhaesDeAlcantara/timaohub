@@ -15,26 +15,48 @@ class NoticiasController extends Controller
     }
 
     /**
-     * Exibe a lista de notícias do Corinthians
+     * Lista de notícias do Corinthians
      */
     public function index()
     {
-        // Busca mais notícias para permitir filtragem
         $noticias = collect(
-            $this->service->getNoticiasCorinthians(12)
+            $this->service->getNoticiasCorinthians(15)
         );
 
-        // Filtro de relevância (anti-CPTM 😅)
-        $noticiasFiltradas = $noticias->filter(function ($noticia) {
+        $palavrasBloqueadas = [
+            'cptm',
+            'metrô',
+            'metro',
+            'estação',
+            'estacoes',
+            'linha',
+            'trem',
+            'transporte'
+        ];
+
+        $noticiasFiltradas = $noticias->filter(function ($noticia) use ($palavrasBloqueadas) {
+
             $texto = strtolower(
                 ($noticia['title'] ?? '') . ' ' .
-                ($noticia['excerpt'] ?? '')
+                ($noticia['excerpt'] ?? '') . ' ' .
+                ($noticia['slug'] ?? '')
             );
 
-            return str_contains($texto, 'corinthians')
-                && !str_contains($texto, 'cptm')
-                && !str_contains($texto, 'metrô')
-                && !str_contains($texto, 'estação');
+            $fonte = strtolower($noticia['source']['name'] ?? '');
+
+            // Deve falar de Corinthians (clube)
+            if (!str_contains($texto, 'corinthians')) {
+                return false;
+            }
+
+            // Bloqueia transporte público em qualquer campo
+            foreach ($palavrasBloqueadas as $bloqueada) {
+                if (str_contains($texto, $bloqueada) || str_contains($fonte, $bloqueada)) {
+                    return false;
+                }
+            }
+
+            return true;
         })->values();
 
         return view('noticias.index', [
@@ -44,7 +66,7 @@ class NoticiasController extends Controller
     }
 
     /**
-     * Exibe a página de leitura da notícia
+     * Página de leitura da notícia
      */
     public function show(string $slug)
     {
